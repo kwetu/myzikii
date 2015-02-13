@@ -1,27 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  	<meta charset="utf-8">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-    <title>Zikii</title>
+<!doctype html>
+<html lang="en">
+<head>
 
-    <script src="cordova.js"></script>  
-    <script type="text/javascript" charset="utf-8">
-
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-         // Now safe to use the Codova API
- window.location="http://zikii.co.ke/";
+  <title>Zikii</title>
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <script>
+  document.addEventListener("deviceready", onDeviceReady, false);
+  function onDeviceReady() {
+    //navigator.splashscreen.hide();
+    if (navigator.network.connection.type == Connection.NONE) {
+      networkError()
+    } else {
+      loadApp()
     }
+  }
 
-    </script>
-  </head>
-  <body>
-  </body>
+  function loadApp() {
+    navigator.app.loadUrl("http://www.zikii.co.ke/")
+  }
+
+  function networkError() {
+    navigator.notification.alert('Zikii requires an internet connection')
+    var $net = document.createElement('div')
+    $net.innerHTML = 'Zikii requires an internet connection'
+    document.body.appendChild($net)
+  }
+  </script>
+
+  <style>
+  body {
+    padding: 15px;
+    background: #23252e;
+    color: #01ced3;
+    text-align: center;
+  }
+  div {
+    font-size: 20px;
+  }
+  </style>
+</head>
+<body>
+</body>
 </html>
